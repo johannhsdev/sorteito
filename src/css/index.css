@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+	--font-sans: "Inter", sans-serif;
+
+	--color-evalia-50: #f4f3fa;
+	--color-evalia-100: #e7e3f6;
+	--color-evalia-200: #d3ccec;
+	--color-evalia-300: #bcb2e0;
+	--color-evalia-400: #a898d6;
+	--color-evalia-500: #9586d2; /* color base */
+	--color-evalia-600: #7968be;
+	--color-evalia-700: #6555a6;
+	--color-evalia-800: #50448b;
+	--color-evalia-900: #3f376e;
+	--color-evalia-950: #251f3f;
+
+	--color-evalia-primary: #9586d2;
+}
