@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
-@theme {
-	--font-sans: "Inter", sans-serif;
+/* ==========================================================================
+   THEME — Paleta evalia + tipografía
+   ========================================================================== */
 
+@theme {
+	/* Tipografía */
+	--font-sans: "Inter", sans-serif;
+	--font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+
+	/* Paleta evalia completa */
 	--color-evalia-50: #f4f3fa;
 	--color-evalia-100: #e7e3f6;
 	--color-evalia-200: #d3ccec;
@@ -16,4 +23,159 @@
 	--color-evalia-950: #251f3f;
 
 	--color-evalia-primary: #9586d2;
+}
+
+/* ==========================================================================
+   SISTEMA DE TEMAS — Variables semánticas
+   ========================================================================== */
+
+/* Modo oscuro (por defecto) */
+:root {
+	--bg-base: #0f0d1a;
+	--bg-card: rgba(37, 31, 63, 0.85);
+	--bg-input: rgba(63, 55, 110, 0.4);
+
+	--text-primary: #f4f3fa;
+	--text-secondary: #bcb2e0;
+	--text-muted: #7968be;
+
+	--border-default: rgba(101, 85, 166, 0.3);
+	--border-glow: rgba(149, 134, 210, 0.5);
+
+	--accent: #9586d2;
+	--accent-hover: #a898d6;
+	--glow-color: rgba(149, 134, 210, 0.4);
+
+	--neural-node-color: rgba(149, 134, 210, 0.7);
+	--neural-line-color: rgba(101, 85, 166, 0.3);
+}
+
+/* Modo claro */
+[data-theme="light"] {
+	--bg-base: #f4f3fa;
+	--bg-card: rgba(255, 255, 255, 0.85);
+	--bg-input: rgba(231, 227, 246, 0.8);
+
+	--text-primary: #251f3f;
+	--text-secondary: #3f376e;
+	--text-muted: #7968be;
+
+	--border-default: rgba(149, 134, 210, 0.4);
+	--border-glow: rgba(101, 85, 166, 0.5);
+
+	--accent: #7968be;
+	--accent-hover: #6555a6;
+	--glow-color: rgba(121, 104, 190, 0.3);
+
+	--neural-node-color: rgba(101, 85, 166, 0.5);
+	--neural-line-color: rgba(149, 134, 210, 0.2);
+}
+
+/* ==========================================================================
+   BASE — Estilos fundamentales
+   ========================================================================== */
+
+@layer base {
+	html,
+	body {
+		transition: background-color 0.3s, color 0.3s;
+	}
+
+	body {
+		background-color: var(--bg-base);
+		color: var(--text-primary);
+		font-family: var(--font-sans);
+	}
+
+	/* Scrollbar personalizada */
+	::-webkit-scrollbar {
+		width: 6px;
+		height: 6px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: rgba(149, 134, 210, 0.4);
+		border-radius: 9999px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background-color: rgba(149, 134, 210, 0.7);
+	}
+
+	/* Selección de texto */
+	::selection {
+		background-color: rgba(149, 134, 210, 0.35);
+		color: var(--text-primary);
+	}
+}
+
+/* ==========================================================================
+   KEYFRAMES
+   ========================================================================== */
+
+@keyframes pulse-glow {
+	0%,
+	100% {
+		box-shadow: 0 0 8px color-mix(in srgb, #9586d2 40%, transparent);
+	}
+	50% {
+		box-shadow: 0 0 20px color-mix(in srgb, #9586d2 70%, transparent),
+			0 0 40px color-mix(in srgb, #9586d2 30%, transparent);
+	}
+}
+
+/* ==========================================================================
+   UTILIDADES CUSTOM
+   ========================================================================== */
+
+@layer utilities {
+	/* Glow sutil sobre elementos */
+	.glow-evalia {
+		box-shadow: 0 0 12px color-mix(in srgb, #9586d2 35%, transparent);
+	}
+
+	/* Glow intenso */
+	.glow-evalia-strong {
+		box-shadow: 0 0 20px color-mix(in srgb, #9586d2 60%, transparent),
+			0 0 40px color-mix(in srgb, #9586d2 25%, transparent);
+	}
+
+	/* Borde con glow evalia */
+	.border-glow {
+		border: 1px solid var(--border-glow);
+		box-shadow: 0 0 10px var(--glow-color);
+	}
+
+	/* Glassmorphism oscuro */
+	.glass-dark {
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		background-color: rgba(37, 31, 63, 0.6);
+		border: 1px solid var(--border-default);
+	}
+
+	/* Glassmorphism claro */
+	.glass-light {
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		background-color: rgba(255, 255, 255, 0.65);
+		border: 1px solid rgba(149, 134, 210, 0.25);
+	}
+
+	/* Texto con gradiente evalia */
+	.text-gradient-evalia {
+		background: linear-gradient(135deg, #bcb2e0, #9586d2);
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	/* Animación de pulsación de glow */
+	.animate-pulse-glow {
+		animation: pulse-glow 2.5s ease-in-out infinite;
+	}
 }
